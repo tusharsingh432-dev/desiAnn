@@ -6,12 +6,14 @@ const dotenv = require(`dotenv`);
 const morgan = require('morgan');
 
 const userRoutes = require('./routes/userRoutes');
+const recipieRoutes = require('./routes/recipieRoutes');
 
 dotenv.config({ path: `${__dirname}/configure.env` });
 app.use(morgan("dev"));
 app.use(express.json());
 
 app.use(`/api/v1/users`, userRoutes);
+app.use(`/api/v1/recipie`, recipieRoutes);
 app.use('/', (req, res) => {
     res.send('Server Running///');
 })
