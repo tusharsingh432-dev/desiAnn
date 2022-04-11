@@ -13,12 +13,14 @@ exports.getAll = async (req, res, next) => {
 }
 
 exports.addRecipe = async (req, res, next) => {
-    const { name, addedBy } = req.body;
+    const { name, addedBy, photo } = req.body;
 
     try {
         const newRecipe = await Recipie.create({
             name: name,
-            addedBy: addedBy
+            addedBy: addedBy,
+            photo,
+            ingredients
         });
 
         res.status(200).json({
@@ -27,6 +29,7 @@ exports.addRecipe = async (req, res, next) => {
         })
 
     } catch (err) {
+        console.log(err);
         res.status(500).json({
             status: `Failed`,
             err

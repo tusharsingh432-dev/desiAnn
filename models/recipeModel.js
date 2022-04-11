@@ -9,6 +9,8 @@ const recipieSchema = mongoose.Schema({
         type: 'string',
         required: [true]
     },
+    photo: String,
+    ingredients: Array,
     date: Date,
     reviews: {
         type: Array,
@@ -21,8 +23,9 @@ const recipieSchema = mongoose.Schema({
 })
 
 recipieSchema.pre('save', function (next) {
-    if (!isNew) return next();
+    if (!this.isNew) return next();
     this.date = Date.now();
+    next();
 })
 
 const Recipie = mongoose.model('Recipie', recipieSchema);
